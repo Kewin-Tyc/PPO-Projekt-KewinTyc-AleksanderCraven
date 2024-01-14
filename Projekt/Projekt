@@ -28,40 +28,6 @@ class FootballTournament(Tournament):
             player.play()
             print(f"Wynik gracza {player.name}: {player.score}")
 
-from abc import ABC, abstractmethod
-
-
-class Player:
-    def __init__(self, name):
-        self.name = name
-        self.score = 0
-
-    def play(self):
-        pass
-
-
-class FootballPlayer(Player):
-    def play(self):
-        print(f"{self.name} strzela gola!")
-        self.score += 1
-
-
-class Tournament(ABC):
-    def __init__(self, players):
-        self.players = players
-
-    @abstractmethod
-    def start_tournament(self):
-        pass
-
-
-class FootballTournament(Tournament):
-    def start_tournament(self):
-        print("Rozpoczyna się turniej piłkarski!")
-        for player in self.players:
-            player.play()
-            print(f"Wynik gracza {player.name}: {player.score}")
-
 
 handle_exception = lambda message: print(f"Wystąpił wyjątek: {message}")
 
@@ -82,6 +48,6 @@ class Main:
             handle_exception(e)
 
 
-if __name__ == "__main__":
+if name == "main":
     main = Main()
     main.run()
