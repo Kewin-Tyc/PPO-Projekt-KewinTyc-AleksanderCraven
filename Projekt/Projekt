@@ -1,0 +1,33 @@
+from abc import ABC, abstractmethod
+
+# Klasa bazowa reprezentująca gracza
+class Player:
+    def __init__(self, name):
+        self.name = name
+        self.score = 0
+
+    def play(self):
+        pass
+
+# Klasa dziedzicząca po Player, reprezentująca konkretne zachowanie gracza
+class FootballPlayer(Player):
+    def play(self):
+        print(f"{self.name} strzela gola!")
+        self.score += 1
+
+# Klasa abstrakcyjna reprezentująca turniej
+class Tournament(ABC):
+    def __init__(self, players):
+        self.players = players
+
+    @abstractmethod
+    def start_tournament(self):
+        pass
+
+# Klasa dziedzicząca po Tournament, implementująca konkretny turniej piłkarski
+class FootballTournament(Tournament):
+    def start_tournament(self):
+        print("Rozpoczyna się turniej piłkarski!")
+        for player in self.players:
+            player.play()
+            print(f"Wynik gracza {player.name}: {player.score}")
