@@ -27,3 +27,61 @@ class FootballTournament(Tournament):
         for player in self.players:
             player.play()
             print(f"Wynik gracza {player.name}: {player.score}")
+
+from abc import ABC, abstractmethod
+
+# Klasa bazowa reprezentująca gracza
+class Player:
+    def __init__(self, name):
+        self.name = name
+        self.score = 0
+
+    def play(self):
+        pass
+
+# Klasa dziedzicząca po Player, reprezentująca konkretne zachowanie gracza
+class FootballPlayer(Player):
+    def play(self):
+        print(f"{self.name} strzela gola!")
+        self.score += 1
+
+# Klasa abstrakcyjna reprezentująca turniej
+class Tournament(ABC):
+    def __init__(self, players):
+        self.players = players
+
+    @abstractmethod
+    def start_tournament(self):
+        pass
+
+# Klasa dziedzicząca po Tournament, implementująca konkretny turniej piłkarski
+class FootballTournament(Tournament):
+    def start_tournament(self):
+        print("Rozpoczyna się turniej piłkarski!")
+        for player in self.players:
+            player.play()
+            print(f"Wynik gracza {player.name}: {player.score}")
+
+# Funkcja anonimowa do obsługi wyjątków
+handle_exception = lambda message: print(f"Wystąpił wyjątek: {message}")
+
+# Klasa reprezentująca główny program
+class Main:
+    def run(self):
+        try:
+            players = [FootballPlayer(f"Gracz {i+1}") for i in range(10)]
+
+            tournament = FootballTournament(players)
+            tournament.start_tournament()
+
+            # Symulacja refleksji - wyświetlenie informacji o obiektach
+            for player in players:
+                print(f"Informacje o graczu {player.name}: {vars(player)}")
+
+        except Exception as e:
+            handle_exception(e)
+
+# Uruchomienie programu
+if __name__ == "__main__":
+    main = Main()
+    main.run()
